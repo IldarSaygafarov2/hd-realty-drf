@@ -1,0 +1,7 @@
+services:
+  hd-api:
+    build: .
+    container_name: hd_api_c
+    ports:
+      - "8002:8002"
+    command: gunicorn -c gunicorn_conf.py core.project.wsgi:application
