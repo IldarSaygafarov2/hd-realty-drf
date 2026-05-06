@@ -1,5 +1,6 @@
 FROM python:3.14-slim
 
+
 WORKDIR /app
 
 COPY requirements.txt /app/
@@ -10,4 +11,5 @@ COPY . /app/
 
 EXPOSE 8001
 
-CMD ["gunicorn", "-c", "gunicorn_conf.py", "core.project.wsgi:application"]
+# CMD ["gunicorn", "--reload", "-c", "gunicorn_conf.py", "core.project.wsgi:application"]
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8002"]

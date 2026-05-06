@@ -2,6 +2,38 @@ services:
   hd-api:
     build: .
     container_name: hd_api_c
+    env_file:
+      - .env
+    depends_on:
+      - hd-db
+    volumes:
+      - ./:/app/
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
     ports:
       - "8002:8002"
-    command: gunicorn -c gunicorn_conf.py core.project.wsgi:application
+    command: >
+      sh -c "
+        python manage.py collectstatic --no-input &&
+        python manage.py makemigrations --no-input &&
+        python manage.py migrate --no-input &&
+        python manage.py createsuperuser --noinput 2>/dev/null || true &&
+        gunicorn --bind 0.0.0.0:8002 --workers 3 core.project.wsgi:application
+      "
+
+  hd-db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5435"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
