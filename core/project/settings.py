@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "core.apps.districts.apps.DistrictsConfig",
     "core.apps.categories.apps.CategoriesConfig",
     "core.apps.consultations.apps.ConsultationsConfig",
+    "core.apps.main.apps.MainConfig",
 ]
 
 MIDDLEWARE = [

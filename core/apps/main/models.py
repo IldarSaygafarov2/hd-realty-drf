@@ -1,7 +1,6 @@
 from django.db import models
 
 from core.apps.common.models import BaseModel
-from core.apps.common.choices import GoalChoices
 
 
 class FAQ(BaseModel):
@@ -14,25 +13,6 @@ class FAQ(BaseModel):
     class Meta:
         verbose_name = "Вопрос-ответ"
         verbose_name_plural = "Вопросы-ответы"
-        ordering = ["-created_at"]
-
-
-class ConsultingRequest(BaseModel):
-
-    name = models.CharField(verbose_name="Имя", max_length=50)
-    phone_number = models.CharField(verbose_name="Номера телефона")
-    goal = models.CharField(
-        verbose_name="Цель",
-        choices=GoalChoices.choices,
-        max_length=20,
-    )
-
-    def __str__(self):
-        return f"Заявка от {self.name}-{self.phone_number}"
-
-    class Meta:
-        verbose_name = "Заявка на консультацию"
-        verbose_name_plural = "Заявки на консультацию"
         ordering = ["-created_at"]
 
 
@@ -122,17 +102,3 @@ class PortfolioImage(BaseModel):
         verbose_name="Фото",
         upload_to="portfolio/images/%Y/%m/%d",
     )
-
-
-class FeedbackRequest(BaseModel):
-    name = models.CharField(verbose_name="Имя", max_length=100)
-    phone_number = models.CharField(verbose_name="Номер телефона", max_length=20)
-    message = models.TextField(verbose_name="Задача")
-
-    def __str__(self):
-        return f"{self.name}-{self.phone_number}"
-
-    class Meta:
-        verbose_name = "Заявка на обратную связь"
-        verbose_name_plural = "Заявки на обратную связь"
-        ordering = ["-created_at"]
