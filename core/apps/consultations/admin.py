@@ -11,9 +11,9 @@ class ConsulationRequestAdmin(unfold_admin.ModelAdmin):
 
 @admin.register(models.ContactRequest)
 class ContactRequestAdmin(unfold_admin.ModelAdmin):
-    pass
+    list_display = ["id", "name", "phone"]
 
 
 @admin.register(models.NextStepRequest)
 class NextStepRequestAdmin(unfold_admin.ModelAdmin):
-    pass
+    list_display = ["id", "name", "phone"]

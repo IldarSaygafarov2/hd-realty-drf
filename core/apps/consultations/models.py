@@ -1,6 +1,7 @@
 from django.db import models
 
 from core.apps.common.models import BaseModel
+from core.apps.common.choices import GoalChoices
 
 
 class NamePhoneFieldsModel(BaseModel):
@@ -14,14 +15,10 @@ class NamePhoneFieldsModel(BaseModel):
 class ConsultationRequest(NamePhoneFieldsModel):
     """Заявка с формы «Получите экспертную оценку»."""
 
-    class Goal(models.TextChoices):
-        BUY = "buy", "Купить"
-        SELL = "sell", "Продать"
-
     goal = models.CharField(
         "Цель",
         max_length=16,
-        choices=Goal.choices,
+        choices=GoalChoices.choices,
     )
     comment = models.TextField("Комментарий", blank=True)
 
