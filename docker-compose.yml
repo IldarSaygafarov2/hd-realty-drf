@@ -8,6 +8,7 @@ services:
       - hd-db
     volumes:
       - ./:/app
+      - media:/app/core/media
     ports:
       - "8002:8002"
     command: >
@@ -15,6 +16,11 @@ services:
         python manage.py collectstatic --no-input &&
         python manage.py makemigrations --no-input &&
         python manage.py migrate --no-input &&
+        python manage.py fill_districts  &&
+        python manage.py fill_categories  &&
+        python manage.py fill_property_types  &&
+        python manage.py fill_renovation_types  &&
+        python manage.py fill_advertisements  &&
         python manage.py createsuperuser --noinput 2>/dev/null || true &&
         gunicorn --bind 0.0.0.0:8002 --workers 3 core.project.wsgi:application --reload
       "
@@ -34,3 +40,4 @@ services:
 
 volumes:
   db_data:
+  media:

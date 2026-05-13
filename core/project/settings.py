@@ -23,11 +23,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_spectacular",
+    # "constance",
     # apps
     "core.apps.districts.apps.DistrictsConfig",
     "core.apps.categories.apps.CategoriesConfig",
     "core.apps.consultations.apps.ConsultationsConfig",
     "core.apps.main.apps.MainConfig",
+    "core.apps.advertisements.apps.AdvertisementsConfig",
 ]
 
 MIDDLEWARE = [
@@ -111,3 +113,38 @@ REST_FRAMEWORK = {
     # YOUR SETTINGS
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
+
+
+DISTRICTS_LIST = [
+    "Мирабадский",
+    "Мирзо-Улугбекский",
+    "Алмазарский",
+    "Бектемирский",
+    "Сергелийский",
+    "Чиланзарский",
+    "Шайхантаурский",
+    "Юнусабадский",
+    "Яккасарайский",
+    "Яшнабадский",
+    "Учтепинский",
+]
+
+RENOVATION_TYPES = [
+    "Черновая",
+    "Предчистовая",
+    "Чистовая",
+    "Косметический",
+    "Капитальный",
+    "Дизайнерский",
+]
+
+CATEGORIES_LIST = [
+    "Квартира",
+    "Коттедж",
+    "Участок",
+    "Дом",
+    "Для бизнеса",
+    "Новостройка",
+]
+
+PROPERTY_TYPES_LIST = ["Новостройки", "Вторичный фонд"]
