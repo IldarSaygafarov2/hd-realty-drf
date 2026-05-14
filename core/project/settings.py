@@ -15,6 +15,7 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 INSTALLED_APPS = [
     "unfold",
+    "unfold.contrib.constance",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -23,7 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_spectacular",
-    # "constance",
+    "constance",
     # apps
     "core.apps.districts.apps.DistrictsConfig",
     "core.apps.categories.apps.CategoriesConfig",
@@ -148,3 +149,18 @@ CATEGORIES_LIST = [
 ]
 
 PROPERTY_TYPES_LIST = ["Новостройки", "Вторичный фонд"]
+
+
+CURRENCY_RATE_API = env.str("CURRENCY_RATE_API")
+
+
+CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
+
+
+CONSTANCE_CONFIG = {
+    "CURRENCY_RATE": (0.0, "Курс доллара на сегодняшний день"),
+}
+
+
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND")

@@ -1,6 +1,11 @@
 from rest_framework import serializers
 
 from . import models
+from core.apps.categories.serializers import (
+    CategorySerializer,
+    RenovationTypeSerializer,
+)
+from core.apps.districts.serializers import DistrictSerializer
 
 
 class AdvertisementImageSerializer(serializers.ModelSerializer):
@@ -33,3 +38,42 @@ class AdvertisementListSerializer(serializers.ModelSerializer):
             "characteristics",
             "created_at",
         ]
+
+
+class AdvertisementDetailSerializer(serializers.ModelSerializer):
+    images = AdvertisementImageSerializer(many=True)
+    characteristics = AdvertisementCharacteristicSerializer(many=True)
+    category = CategorySerializer(many=False)
+    renovation_type = RenovationTypeSerializer(many=False)
+    district = DistrictSerializer(many=False)
+
+    class Meta:
+        model = models.Advertisement
+        fields = [
+            "id",
+            "title",
+            "slug",
+            "price_usd",
+            "price_uzs",
+            "total_area",
+            "living_space",
+            "ceiling_height",
+            "address",
+            "city",
+            "complex_name",
+            "special_conditions",
+            "description",
+            "operation_type",
+            "number_of_floors",
+            "year_of_construction",
+            "rooms_quantity",
+            "is_moderated",
+            "district",
+            # foreigns
+            "renovation_type",
+            "category",
+            "images",
+            "characteristics",
+        ]
+
+    # with default values
